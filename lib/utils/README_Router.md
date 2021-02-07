@@ -1,7 +1,7 @@
 # fluro 路由
 
 ## 官网文档传送门
-    https://github.com/lukepighetti/fluro
+   [https://github.com/lukepighetti/fluro](https://github.com/lukepighetti/fluro)
 
 
 具体api方法有官网，这里再照猫画虎没有意义，通过FlutterDemo只通俗的分步骤讲述在项目中集成fluro做出笔记
