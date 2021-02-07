@@ -1,13 +1,23 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutterDemo/config.dart';
+import 'package:flutterDemo/utils/globalNavigatorServer.dart';
+import 'package:flutterDemo/utils/routeflu.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
+import 'package:flutterDemo/utils/application.dart';
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  
   @override
   Widget build(BuildContext context) {
+    initPlugin(context);
+    print('==========当前环境配置参数=================');
+    print(MyAppConfig().getCofig());
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: ThemeModel())
@@ -67,15 +77,25 @@ class MyApp extends StatelessWidget {
             child: KeyboardDismissOnTap(
               child: MaterialApp(
                 debugShowCheckedModeBanner: false, //不要显示右侧顶部bug调试
-                home: Container(
-                  child: Text('321'),
-                ),
+                navigatorKey: Application.navigatorKey,
+                onGenerateRoute: Application.router.generator,
+                navigatorObservers: [GLObserver()], //全局路由跳转监听
               ),
             ),
           );
         }
       ),
     );
+  }
+
+  initPlugin(context) async {
+    // 初始化路由
+    final router = FluroRouter();
+    configureRoutes(router);
+    Application.router = router;
+    //jpush
+    // final JPush jpush = new JPush();
+    // Application.jpush = jpush;
   }
 }
 
