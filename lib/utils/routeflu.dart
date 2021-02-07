@@ -6,7 +6,9 @@ import 'package:flutterDemo/page/base/DefaultPage.dart';
 void configureRoutes(FluroRouter router) {
   router.notFoundHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-    return Container();
+    return Container(
+      child: Text('404'),
+    );
   });
 
   router.define('/', handler: Handler(handlerFunc: (context, params) => DefaultPage()));
